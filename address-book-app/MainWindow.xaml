@@ -1,0 +1,72 @@
+﻿<Window x:Class="address_book_app.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:address_book_app"
+        xmlns:models="clr-namespace:address_book_app.Models"
+        mc:Ignorable="d"
+        Title="Address Book" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
+            <TextBlock Text="First Name" FontWeight="DemiBold" />
+            <TextBox Name="tbFirstName" Padding="5"/>
+
+            <TextBlock Text="Last Name" FontWeight="DemiBold" />
+            <TextBox Name="tbLastName" Padding="5"/>
+
+            <TextBlock Text="E-Mail" FontWeight="DemiBold" />
+            <TextBox Name="tbEmail" Padding="5"/>
+
+            <TextBlock Text="Phone number" FontWeight="DemiBold" />
+            <TextBox Name="tbPhone" Padding="5"/>
+
+            <TextBlock Text="Address" FontWeight="DemiBold" />
+            <TextBox Name="tbAddress" Padding="5"/>
+
+            <Button Name="btn_Add" Click="Btn_Add_Click" Margin="0 5 0 0" Padding="4" Content="Create Contact"/>
+        </StackPanel>
+        <Label Grid.Column="1" FontWeight="Bold"  HorizontalAlignment="Center">All contacts</Label>
+        <StackPanel Grid.Column="2" Margin="0 25 0 0">
+            <ListView Name="lvPersons">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="models:Person">
+                        <StackPanel>
+                            <TextBlock Text="{Binding FirstName}" />
+                            <TextBlock Text="{Binding Email}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button FontSize="10" 
+                    Background="Transparent" 
+                    BorderBrush="Transparent" 
+                    Foreground="MediumBlue" 
+                    Margin="0 0 5 0"  
+                    Content="View project on Github" 
+                    Width="120" 
+                    HorizontalAlignment="Right" 
+                    Click="Button_Click"
+                    />
+                    
+        </StackPanel>     
+
+        <!--<StackPanel VerticalAlignment="Bottom" Width="200">
+            <Button Margin="0 0 0 10" Padding="5" Content="Skapa en kontakt"/>
+            <Button Margin="0 0 0 10" Padding="5" Content="Visa alla kontakter"/>
+            <Button Margin="0 0 0 10" Padding="5" Content="Visa en specifik kontakt"/>
+            <Button Margin="0 0 0 10" Padding="5" Content="Ta bort en specifik kontakt"/>
+        </StackPanel>-->
+    </Grid>
+</Window> 
+ 
