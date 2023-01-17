@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="address_book_app.Views.ContactsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodels="clr-namespace:address_book_app.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewmodels:ContactsViewModel}"
+             >
+    <Grid>
+        <TextBlock FontWeight="Bold"  HorizontalAlignment="Center" Text="{Binding PageTitle}"/>
+        <StackPanel Margin="0 25 0 0">
+            <ListView BorderThickness="0" ItemsSource="{Binding Persons}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding FirstName}" />
+                            <TextBlock Text="{Binding Email}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>
