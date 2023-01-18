@@ -9,7 +9,8 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="Address Book" Height="450" Width="800">
-    <Grid>
+    <Grid> 
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
@@ -22,13 +23,10 @@
 
         <!--MENU-->
         <StackPanel Grid.Column="0" Grid.Row="0" Background="MediumPurple">
-            <Button Padding="5" Margin="5" Content="C" Command="{Binding CreateViewCommand}"/>
-            <Button Padding="5" Margin="5 0 5 5" Content="V" Command="{Binding ContactsViewCommand}"/>
+            <Button Margin="5" Content="&#xf234;" Command="{Binding CreateViewCommand}" Style="{StaticResource navButton}"/>
+            <Button Margin="5" Content="&#xf0c0;" Command="{Binding ContactsViewCommand}" Style="{StaticResource navButton}"/>
         </StackPanel>
 
-        
-        
-        
         <!--BODY-->
         <ContentControl Background="Transparent" Grid.Column="1" Grid.Row="0" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
@@ -41,11 +39,9 @@
             </ContentControl.Resources>
         </ContentControl>
 
-
-        
         <!--FOOTER-->
-        <StackPanel Grid.Column="1" Grid.Row="1" Background="MediumPurple">
-            <Button FontSize="10" 
+            <StackPanel Grid.Column="1" Grid.Row="1" Background="MediumPurple">
+                <Button FontSize="10" 
                     Background="Transparent" 
                     BorderBrush="Transparent" 
                     Foreground="MediumBlue" 
@@ -54,8 +50,9 @@
                     Width="120"
                     HorizontalAlignment="Right" 
                     Command="{Binding GithubLinkCommand}"
-            />
-        </StackPanel>
+                />
+            </StackPanel>
     </Grid>
+
 </Window> 
  
