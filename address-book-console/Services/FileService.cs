@@ -1,4 +1,5 @@
-﻿using address_book_console.Models;
+﻿using address_book_console.Interfaces;
+using address_book_console.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
@@ -7,6 +8,8 @@ namespace address_book_console.Services
     public class FileService
     {
         private readonly string filePath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\Content.json";
+        // $@"{Directory.GetCurrentDirectory()}\contacts.json";
+
         private List<Person> persons;
 
         public FileService()
@@ -35,6 +38,9 @@ namespace address_book_console.Services
         {
             persons.Add(person);
             SaveToFile();
+            Console.WriteLine(" Kontakten har skapats. Tryck valfri tangent för att återgå till menyn.");
+            Console.ReadKey();
+
         }
 
         public ObservableCollection<Person> Persons()
@@ -47,22 +53,68 @@ namespace address_book_console.Services
         }
 
 
-        public void RemovePersonFromList(Person person)
+        public void GetByEmail(string Email)
         {
-            var _person = GetPersonFromList(person);
-            if (_person != null)
-                persons.Remove(person);
+            using var sr = new StreamReader(filePath);
+            persons = JsonConvert.DeserializeObject<List<Person>>(sr.ReadToEnd()) ?? null!;
+            var person = persons.FirstOrDefault(x => x.Email.ToLower() == Email.ToLower());
+            if (person != null)
+            {
+                Console.WriteLine($"" +
+                $"Förnamn: {person.FirstName}\n" +
+                $"Efternamn: {person.LastName}\n" +
+                $"Epost-adress: {person.Email}\n" +
+                $"Telefonnummer: {person.PhoneNumber}\n" +
+                $"Adress: {person.Address}\n");
+            }
+            else {
+                Console.WriteLine($" Ingen kontakt hittades med E-post adressen {Email} hittades.");
+            }
         }
 
-        public Person GetPersonFromList(Person person)
-        {
-            var _person = persons.FirstOrDefault(x => x.Id == person.Id);
-            return _person!;
-        }
 
-        public IEnumerable<Person> GetPeopleFromList()
+        public void Delete(string _Email)
         {
-            return persons;
+            Console.Clear();
+            using var sr = new StreamReader(filePath);
+            persons = JsonConvert.DeserializeObject<List<Person>>(sr.ReadToEnd()) ?? null!;
+            var person = persons.FirstOrDefault(x => x.Email.ToLower() == _Email.ToLower());
+
+            if (person == null)
+            {
+                Console.Clear();
+                Console.WriteLine($"\n Ingen kontakt hittades med E-post adressen {_Email}\n Tryck valfri tangent för att återgå till menyn.");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine($" Kontakt som tas bort.\n\n" +
+                $" Förnamn: {person.FirstName}\n" +
+                $" Efternamn: {person.LastName}\n" +
+                $" Epost-adress: {person.Email}\n" +
+                $" Telefonnummer: {person.PhoneNumber}\n" +
+                $" Adress: {person.Address}\n");
+
+                Console.WriteLine("\n Är du säker på att du vill ta bort denna kontakt? (y/n): \n");
+
+                string anwser = Console.ReadLine() ?? string.Empty;
+
+                if (anwser.ToLower() == "y")
+                {
+                    try
+                    {
+                        persons.Remove(person);
+                        Console.WriteLine(" Kontakten togs bort. Tryck valfri tangent för att återgå till menyn.");
+                        Console.ReadKey();
+                    }
+                    catch{}
+                }
+                else
+                {
+                    Console.WriteLine(" Kontakten togs inte bort. Tryck valfri tangent för att återgå till menyn.");
+                    Console.ReadKey();
+                }
+            }
         }
     }
 }
