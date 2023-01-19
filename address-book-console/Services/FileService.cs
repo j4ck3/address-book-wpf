@@ -1,5 +1,4 @@
-﻿using address_book_console.Interfaces;
-using address_book_console.Models;
+﻿using address_book_console.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
@@ -11,6 +10,7 @@ namespace address_book_console.Services
         // $@"{Directory.GetCurrentDirectory()}\contacts.json";
 
         private ObservableCollection<Person> persons = new();
+        private readonly string EscMsg = "Tryck valfri tangent för att återgå till menyn.";
 
         public FileService()
         {
@@ -37,7 +37,7 @@ namespace address_book_console.Services
         {
             persons.Add(person);
             SaveToFile(persons);
-            Console.WriteLine(" Kontakten har skapats. Tryck valfri tangent för att återgå till menyn.");
+            Console.WriteLine($" Kontakten har skapats. {EscMsg}");
             Console.ReadKey();
         }
 
@@ -57,31 +57,32 @@ namespace address_book_console.Services
             if (person != null)
             {
                 Console.WriteLine($"" +
-                $"Förnamn: {person.FirstName}\n" +
-                $"Efternamn: {person.LastName}\n" +
-                $"Epost-adress: {person.Email}\n" +
-                $"Telefonnummer: {person.PhoneNumber}\n" +
-                $"Adress: {person.Address}\n");
+                $" Förnamn: {person.FirstName}\n" +
+                $" Efternamn: {person.LastName}\n" +
+                $" Epost-adress: {person.Email}\n" +
+                $" Telefonnummer: {person.PhoneNumber}\n" +
+                $" Adress: {person.Address}\n");
+
+                Console.WriteLine($"{EscMsg}");
             }
             else {
-                Console.WriteLine($" Ingen kontakt hittades med E-post adressen {_Email} hittades.");
+                Console.WriteLine($" Ingen kontakt hittades med E-post adressen {_Email}\n{EscMsg}");
+                Console.ReadKey();
             }
         }
 
         public void Delete(string _Email)
         {
-            Console.Clear();
             ReadFromFile();
             var person = persons.FirstOrDefault(x => x.Email.ToLower() == _Email.ToLower());
             if (person == null)
             {
-                Console.Clear();
-                Console.WriteLine($"\n Ingen kontakt hittades med E-post adressen {_Email}\n Tryck valfri tangent för att återgå till menyn.");
+                Console.WriteLine($"\n Ingen kontakt hittades med E-post adressen {_Email}\n{EscMsg}");
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine($" Kontakt som tas bort.\n\n" +
+                Console.WriteLine($" -----------Kontakt som tas bort-------------\n\n" +
                 $" Förnamn: {person.FirstName}\n" +
                 $" Efternamn: {person.LastName}\n" +
                 $" E-Post adress: {person.Email}\n" +
@@ -98,18 +99,18 @@ namespace address_book_console.Services
                     {
                         persons.Remove(person);
                         SaveToFile(persons);
-                        Console.WriteLine(" Kontakten togs bort. Tryck valfri tangent för att återgå till menyn.");
+                        Console.WriteLine($" Kontakten togs bort. {EscMsg}");
                         Console.ReadKey();
                     }
                     catch
                     {
-                        Console.WriteLine(" Något gick fel när kontakten skulle tas bort. Tryck valfri tangent för att återgå till menyn.");
+                        Console.WriteLine($" Något gick fel när kontakten skulle tas bort. {EscMsg}");
                         Console.ReadKey();
                     }
                 }
                 else
                 {
-                    Console.WriteLine(" Kontakten togs inte bort. Tryck valfri tangent för att återgå till menyn.");
+                    Console.WriteLine($" Kontakten togs inte bort. {EscMsg}");
                     Console.ReadKey();
                 }
             }

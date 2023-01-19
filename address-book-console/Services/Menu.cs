@@ -10,10 +10,9 @@ internal class Menu
 
     public string FilePath { get; set; } = null!;
 
-    //    MENU
+    //--------------------MENU
     public void WelcomeMenu()
     {
-        Console.Clear();
         Console.WriteLine(
            "--------------Meny----------------\n\n" +
            "    1. Lägg till en ny Kontakt\n" +
@@ -26,19 +25,17 @@ internal class Menu
         switch (option)
         {
             case "1": CreateContact(); break;
-            case "2": GetAllContacts(); break;
-            case "3": GetContactByEmail(); break;
-            case "4": Remove(); break;  
+            case "2": GetContacts(); break;
+            case "3": GetContact(); break;
+            case "4": Remove(); break;
         }
     }
 
-    //    CREATE CONTACT
+    //--------------------CREATE CONTACT
     private void CreateContact()
     {
         Console.Clear();
         Console.WriteLine("-----Lägg till en ny kontakt------");
-
-
         IPerson person = new Person();
         Console.Write("Ange Förnamn: ");
         person.FirstName = Console.ReadLine() ?? "";
@@ -61,64 +58,55 @@ internal class Menu
 
     }
 
-    //    GET ALL CONTACTS
-    private void GetAllContacts()
+    //--------------------GET ALL CONTACTS
+    private void GetContacts()
     {
-        Console.Clear();
-        Console.WriteLine("-----------Alla Kontakter-------------");
-        Console.WriteLine("");
-        var persons = file.Persons();
-        if (persons != null)
-        {
-            foreach (var person in persons)
-            {
-                Console.WriteLine($"{person.FirstName} {person.LastName}");
-            }
-            Console.WriteLine("\n Tryck valfri tangent för att återgå till menyn.");
-            Console.ReadKey();
-            
-        }
-        else 
-            Console.WriteLine("Inga Kontakter ännu."); 
+        GetContactsAndDisplay();
+
+        Console.WriteLine("\n Tryck valfri tangent för att återgå till menyn.");
+        Console.ReadKey();
+
     }
 
-    //    GET CONTACT BY EMAIL
-    private void GetContactByEmail()
+    //--------------------GET CONTACT BY EMAIL
+    private void GetContact()
     {
-        Console.Clear();
-        Console.WriteLine("Sök kontakt genom E-post adressen.");
+        GetContactsAndDisplay();
+
+        Console.WriteLine(" Sök kontakt genom E-post adressen.\n");
         var _Email = Console.ReadLine();
         if (_Email != null)
-        {
             file.GetByEmail(_Email);
-            Console.WriteLine("Tryck valfri tangent för att återgå till menyn.");
-        }
-        else return;
         Console.ReadKey();
     }
 
 
-    //    REMOVE CONTACT EMAIL
+    //--------------------REMOVE CONTACT BY EMAIL
     private void Remove()
     {
+        GetContactsAndDisplay();
+
+        Console.WriteLine("\n Ta bort en kontakt genom att skriva kontaktens E-post adress");
+        var _Email = Console.ReadLine();
+        if (_Email != null)
+            file.Delete(_Email);
+    }
+
+
+
+    //--------------------HELPER
+    private void GetContactsAndDisplay()
+    {
         Console.Clear();
-        file.Persons();
-        Console.WriteLine("Alla kontakter\n");
         var persons = file.Persons();
+        Console.WriteLine("-----------Alla Kontakter-------------\n");
         if (persons != null)
         {
             foreach (var person in persons)
             {
-                Console.WriteLine($"{person.FirstName} - {person.Email}");
+                Console.WriteLine($" {person.FirstName} - {person.Email} \n");
             }
         }
-        else
-            Console.WriteLine("Inga Kontakter ännu.");
-
-        Console.WriteLine("\nTa bort en kontakt genom att skriva kontaktens E-post adress");
-        var _Email = Console.ReadLine();
-        if (_Email != null)
-            file.Delete(_Email);
     }
 }
 
