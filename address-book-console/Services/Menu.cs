@@ -87,10 +87,10 @@ internal class Menu
     {
         Console.Clear();
         Console.WriteLine("Sök kontakt genom E-post adressen.");
-        var Email = Console.ReadLine();
-        if (Email != null)
+        var _Email = Console.ReadLine();
+        if (_Email != null)
         {
-            file.GetByEmail(Email);
+            file.GetByEmail(_Email);
             Console.WriteLine("Tryck valfri tangent för att återgå till menyn.");
         }
         else return;
@@ -103,7 +103,7 @@ internal class Menu
     {
         Console.Clear();
         file.Persons();
-        Console.WriteLine("Alla kontakter");
+        Console.WriteLine("Alla kontakter\n");
         var persons = file.Persons();
         if (persons != null)
         {
@@ -115,7 +115,7 @@ internal class Menu
         else
             Console.WriteLine("Inga Kontakter ännu.");
 
-        Console.WriteLine("Ta bort en kontakt genom att skriva kontaktens E-post adress");
+        Console.WriteLine("\nTa bort en kontakt genom att skriva kontaktens E-post adress");
         var _Email = Console.ReadLine();
         if (_Email != null)
             file.Delete(_Email);
