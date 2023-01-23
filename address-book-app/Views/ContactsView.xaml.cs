@@ -30,7 +30,12 @@ namespace address_book_app.Views
             Guid Id = person.Id;
             if (Id != null)
             {
-                file.RemovePerson(Id);
+                if (MessageBox.Show("Are You sure you want to delete the contact?",
+                "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    file.RemovePerson(Id);
+                }
+
             }
         }
 
