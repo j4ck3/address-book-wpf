@@ -22,9 +22,9 @@ namespace address_book_app.ViewModels
         }
 
         [RelayCommand]
-        private void GithubLink()
+        private static void GithubLink()
         {
-                System.Diagnostics.Process.Start(new ProcessStartInfo
+                Process.Start(new ProcessStartInfo
                 {
                     FileName = "https://github.com/j4ck3/address-book-wpf",
                     UseShellExecute = true

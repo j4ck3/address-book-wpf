@@ -3,7 +3,7 @@ using System;
 
 namespace address_book_console.Models
 {
-    public class Person : IPerson
+    public class PersonModel : IPerson
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string FirstName { get; set; } = null!;

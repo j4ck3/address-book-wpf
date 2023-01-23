@@ -9,7 +9,7 @@ namespace address_book_console.Services
         private readonly string filePath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\Content.json";
         // $@"{Directory.GetCurrentDirectory()}\contacts.json";
 
-        private ObservableCollection<Person> persons = new();
+        private ObservableCollection<PersonModel> persons = new();
         private readonly string EscMsg = "Tryck valfri tangent för att återgå till menyn.";
 
         public FileService()
@@ -17,7 +17,7 @@ namespace address_book_console.Services
             ReadFromFile();
         }
 
-        private void SaveToFile(ObservableCollection<Person> persons)
+        private void SaveToFile(ObservableCollection<PersonModel> persons)
         {
             using var sw = new StreamWriter(filePath);
             sw.WriteLine(JsonConvert.SerializeObject(persons));
@@ -28,12 +28,12 @@ namespace address_book_console.Services
             try
             {
                 using var sr = new StreamReader(filePath);
-                persons = JsonConvert.DeserializeObject<ObservableCollection<Person>>(sr.ReadToEnd())!;
+                persons = JsonConvert.DeserializeObject<ObservableCollection<PersonModel>>(sr.ReadToEnd())!;
             }
-            catch { persons = new ObservableCollection<Person>(); }
+            catch { persons = new ObservableCollection<PersonModel>(); }
         }
 
-        public void AddToList(Person person)
+        public void AddToList(PersonModel person)
         {
             persons.Add(person);
             SaveToFile(persons);
@@ -41,9 +41,9 @@ namespace address_book_console.Services
             Console.ReadKey();
         }
 
-        public ObservableCollection<Person> Persons()
+        public ObservableCollection<PersonModel> Persons()
         {
-            var items = new ObservableCollection<Person>();
+            var items = new ObservableCollection<PersonModel>();
             foreach (var person in persons)
                 items.Add(person);
 

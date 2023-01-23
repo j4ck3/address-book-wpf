@@ -36,7 +36,7 @@ internal class Menu
     {
         Console.Clear();
         Console.WriteLine("-----Lägg till en ny kontakt------");
-        IPerson person = new Person();
+        IPerson person = new PersonModel();
         Console.Write("Ange Förnamn: ");
         person.FirstName = Console.ReadLine() ?? "";
         Console.Write("Ange Efternamn: ");
@@ -47,7 +47,7 @@ internal class Menu
         person.PhoneNumber = Console.ReadLine() ?? "";
         Console.Write("Ange Adress: ");
         person.Address = Console.ReadLine() ?? "";
-        file.AddToList(new Person
+        file.AddToList(new PersonModel
         {
             FirstName = person.FirstName,
             LastName = person.LastName,

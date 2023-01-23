@@ -9,9 +9,15 @@
              d:DataContext="{d:DesignInstance viewmodels:ContactsViewModel}"
              >
     <Grid>
-        <TextBlock FontWeight="Bold"  HorizontalAlignment="Center" Text="{Binding PageTitle}"/>
-        <StackPanel Margin="0 25 0 0">
-            <ListView BorderThickness="0" ItemsSource="{Binding Persons}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/> 
+            <ColumnDefinition/> 
+        </Grid.ColumnDefinitions>
+
+
+        <!--Contacts list-->
+        <!--<StackPanel Background="Beige" Margin="25">
+            <ListView BorderThickness="0" Background="Transparent" ItemsSource="{Binding Persons}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -21,6 +27,50 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </StackPanel>-->
+
+
+        <!--Persons List-->
+        <DockPanel Background="Beige" Margin="25">
+            <DataGrid ColumnWidth="*" x:Name="PersonsGrid" x:FieldModifier="public" ItemsSource="{Binding Persons}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Actions" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete"
+                                        Click="Button_Click">
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <!--Details view-->
+        <StackPanel Background="Beige" Grid.Column="1" Margin="25">
+            <TextBlock FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Text="Details"/>
+            <ListView BorderThickness="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock x:Name="tb_firstName" />
+                            <TextBlock x:Name="tb_lastName" />
+                            <TextBlock x:Name="tb_email" />
+                            <TextBlock x:Name="tb_phoneNumber" />
+                            <TextBlock x:Name="tb_address" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </UserControl>
+ 

@@ -3,6 +3,8 @@ using System;
 
 namespace address_book_app.Models
 {
+
+
     public class PersonModel : IPerson
     {
 
@@ -12,5 +14,6 @@ namespace address_book_app.Models
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Address { get; set; } = null!;
+
     }
 }

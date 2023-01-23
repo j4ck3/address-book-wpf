@@ -1,6 +1,6 @@
 ﻿namespace address_book_console.Interfaces
 {
-    internal interface IPerson
+    public interface IPerson
     {
         Guid Id { get; set; }
         string FirstName { get; set; }

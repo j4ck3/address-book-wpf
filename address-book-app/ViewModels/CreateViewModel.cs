@@ -3,7 +3,9 @@ using address_book_app.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Net;
+using System.Windows.Input;
 
 namespace address_book_app.ViewModels
 {
@@ -29,9 +31,6 @@ namespace address_book_app.ViewModels
         private string phoneNumber = string.Empty;
         [ObservableProperty]
         private string address = string.Empty;
-
-
-
 
         [RelayCommand]
         private void AddContact()
