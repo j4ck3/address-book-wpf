@@ -31,6 +31,10 @@ namespace address_book_app.ViewModels
         private string phoneNumber = string.Empty;
         [ObservableProperty]
         private string address = string.Empty;
+        [ObservableProperty]
+        private string zip = string.Empty;
+        [ObservableProperty]
+        private string city = string.Empty;
 
         [RelayCommand]
         private void AddContact()
@@ -41,12 +45,18 @@ namespace address_book_app.ViewModels
                 LastName = lastName,
                 Email = email,
                 PhoneNumber = phoneNumber,
-                Address = address
+                Address = address,
+                Zip = zip,
+                City = city
             });
             ClearForm();
         }
 
 
+
+
+
+        //Helper
         public void ClearForm()
         {
             FirstName = string.Empty;
@@ -54,6 +64,8 @@ namespace address_book_app.ViewModels
             Email = string.Empty;
             PhoneNumber = string.Empty;
             Address = string.Empty;
+            Zip = string.Empty;
+            City = string.Empty;
         }
     }
 }

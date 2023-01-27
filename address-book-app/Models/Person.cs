@@ -14,6 +14,8 @@ namespace address_book_app.Models
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Address { get; set; } = null!;
+        public string Zip { get; set; } = null!;
+        public string City { get; set; } = null!;
 
     }
 }

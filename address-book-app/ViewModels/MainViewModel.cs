@@ -16,6 +16,7 @@ namespace address_book_app.ViewModels
         [RelayCommand]
         private void ContactsView() => CurrentViewModel = new ContactsViewModel();
 
+
         public MainViewModel()
         {
             currentViewModel = new ContactsViewModel();

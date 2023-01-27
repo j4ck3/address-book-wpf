@@ -9,12 +9,9 @@ namespace address_book_app.Views
     /// </summary>
     public partial class UpdateView : UserControl
     {
-
-
-        public UpdateView(Guid Id)
+        public UpdateView()
         {
-
-            //Id = Person.Id;
+            InitializeComponent();
         }
     }
 }

@@ -6,28 +6,12 @@
              xmlns:viewmodels="clr-namespace:address_book_app.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewmodels:ContactsViewModel}"
-             >
+             d:DataContext="{d:DesignInstance viewmodels:ContactsViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/> 
-            <ColumnDefinition/> 
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-
-        <!--Contacts list-->
-        <!--<StackPanel Background="Beige" Margin="25">
-            <ListView BorderThickness="0" Background="Transparent" ItemsSource="{Binding Persons}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding FirstName}" />
-                            <TextBlock Text="{Binding Email}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>-->
 
 
         <!--Persons List-->
@@ -44,9 +28,18 @@
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete"
-                                        Click="Button_Click">
-                                </Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Delete"
+                                            Click="Button_Click"
+                                            Margin="0 0 5 0"
+                                            Width="50">
+                                    </Button>
+                                    <Button x:Name="Edit"
+                                            Content="Edit"
+                                            Width="50"
+                                            Click="Edit_Click">
+                                    </Button>
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -61,11 +54,11 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock x:Name="tb_firstName" />
-                            <TextBlock x:Name="tb_lastName" />
-                            <TextBlock x:Name="tb_email" />
-                            <TextBlock x:Name="tb_phoneNumber" />
-                            <TextBlock x:Name="tb_address" />
+                            <TextBox x:Name="tb_firstName" />
+                            <TextBox x:Name="tb_lastName" />
+                            <TextBox x:Name="tb_email" />
+                            <TextBox x:Name="tb_phoneNumber" />
+                            <TextBox x:Name="tb_address" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

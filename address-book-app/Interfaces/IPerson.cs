@@ -10,5 +10,7 @@ namespace address_book_app.Interfaces
         string Email { get; set; }
         string PhoneNumber { get; set; }
         string Address { get; set; }
+        string Zip { get; set; }
+        string City { get; set; }
     }
 }

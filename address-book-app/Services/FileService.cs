@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Navigation;
 
 namespace address_book_app.Services
 {
@@ -43,6 +44,23 @@ namespace address_book_app.Services
             SaveToFile(persons);
         }
 
+        public void Update(PersonModel person)
+        {
+            ReadFromFile();
+            var _person = persons.FirstOrDefault(x => x.Id == person.Id);
+            if (_person != null)
+            {
+                _person.FirstName = person.FirstName;
+                _person.LastName = person.LastName;
+                _person.Email = person.Email;
+                _person.PhoneNumber = person.PhoneNumber;
+                _person.Address = person.Address;
+                _person.City = person.City;
+                _person.Zip = person.Zip;
+            }
+            SaveToFile(persons);
+        }
+
         public ObservableCollection<PersonModel> Persons()
         {
             var items = new ObservableCollection<PersonModel>();
@@ -52,11 +70,6 @@ namespace address_book_app.Services
             return items;
         }
 
-        public void GetContact(Guid _Id)
-        {
-            ReadFromFile();
-            var person = persons.FirstOrDefault(x => x.Id == _Id);
-        }
 
         public void RemovePerson(Guid Id)
         {

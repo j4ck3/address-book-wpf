@@ -1,10 +1,9 @@
 ﻿using address_book_app.Models;
 using address_book_app.Services;
+using address_book_app.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 namespace address_book_app.Views
@@ -15,11 +14,12 @@ namespace address_book_app.Views
     public partial class ContactsView : UserControl
     {
         private readonly FileService file;
-        //private ObservableCollection<PersonModel> persons;
+        private readonly MainViewModel mainViewModel;
         public ContactsView()
         {
             InitializeComponent();
             file = new FileService();
+            mainViewModel = new MainViewModel();
 
         }
 
@@ -30,7 +30,7 @@ namespace address_book_app.Views
             Guid Id = person.Id;
             if (Id != null)
             {
-                if (MessageBox.Show("Are You sure you want to delete the contact?",
+                if (MessageBox.Show("Are you sure you want to delete the contact?",
                 "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     file.RemovePerson(Id);
@@ -38,6 +38,18 @@ namespace address_book_app.Views
 
             }
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            Button? button = sender as Button;
+            PersonModel? person = button.DataContext as PersonModel;
+
+            UpdateView UpdateView = new();
+            DataContext = new UpdateViewModel(person);
+            Content = UpdateView;
+
+        }
+
 
 
         //private readonly TextBox tb_firstName;
@@ -55,12 +67,9 @@ namespace address_book_app.Views
 
         //public void PersonsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
-
-        //    Debug.WriteLine("sadf");
         //    DataGrid dg = (DataGrid)sender;
         //    if (dg.SelectedItem is DataRowView row_selected)
         //    {
-        //        Debug.WriteLine(row_selected.ToString());
         //        tb_firstName.Text = row_selected["FirstName"].ToString();
         //        tb_lastName.Text = row_selected["LastName"].ToString();
         //        tb_email.Text = row_selected["Email"].ToString();
