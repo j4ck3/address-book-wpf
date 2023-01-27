@@ -14,13 +14,11 @@ namespace address_book_app.Views
     public partial class ContactsView : UserControl
     {
         private readonly FileService file;
-        private readonly MainViewModel mainViewModel;
+
         public ContactsView()
         {
             InitializeComponent();
             file = new FileService();
-            mainViewModel = new MainViewModel();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -28,9 +26,9 @@ namespace address_book_app.Views
             Button? button = sender as Button;
             PersonModel? person = button.DataContext as PersonModel;
             Guid Id = person.Id;
-            if (Id != null)
+            if (Id != Guid.Empty)
             {
-                if (MessageBox.Show("Are you sure you want to delete the contact?",
+                if (MessageBox.Show($"Are you sure you want to delete the contact {person.FirstName.Trim()}?",
                 "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     file.RemovePerson(Id);
@@ -47,36 +45,23 @@ namespace address_book_app.Views
             UpdateView UpdateView = new();
             DataContext = new UpdateViewModel(person);
             Content = UpdateView;
-
         }
 
+        private void PersonsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var person = PersonsGrid.SelectedItem as PersonModel;
 
-
-        //private readonly TextBox tb_firstName;
-
-        //private readonly TextBox tb_lastName;
-
-        //private readonly TextBox tb_email;
-
-        //private readonly TextBox tb_phoneNumber;
-
-        //private readonly TextBox tb_address;
-
-
-
-
-        //public void PersonsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    DataGrid dg = (DataGrid)sender;
-        //    if (dg.SelectedItem is DataRowView row_selected)
-        //    {
-        //        tb_firstName.Text = row_selected["FirstName"].ToString();
-        //        tb_lastName.Text = row_selected["LastName"].ToString();
-        //        tb_email.Text = row_selected["Email"].ToString();
-        //        tb_phoneNumber.Text = row_selected["PhoneNumber"].ToString();
-        //        tb_address.Text = row_selected["Address"].ToString();
-        //    }
-        //}
+            if (person != null)
+            {
+                tb_firstName.Text = person.FirstName;
+                tb_lastName.Text = person.LastName;
+                tb_email.Text = person.Email;
+                tb_phoneNumber.Text = person.PhoneNumber;
+                tb_address.Text = person.Address;
+                tb_zip.Text = person.Zip;
+                tb_city.Text = person.City;
+            }
+        }
+        
     }
 }
-

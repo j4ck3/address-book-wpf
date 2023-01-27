@@ -16,7 +16,7 @@
 
         <!--Persons List-->
         <DockPanel Background="Beige" Margin="25">
-            <DataGrid ColumnWidth="*" x:Name="PersonsGrid" x:FieldModifier="public" ItemsSource="{Binding Persons}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" >
+            <DataGrid ColumnWidth="*" x:Name="PersonsGrid" x:FieldModifier="public" ItemsSource="{Binding Persons}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" BorderBrush="{x:Null}" Background="White" FontFamily="Cascadia Mono SemiBold" SelectionChanged="PersonsGrid_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding FirstName}" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
@@ -48,21 +48,44 @@
         </DockPanel>
 
         <!--Details view-->
-        <StackPanel Background="Beige" Grid.Column="1" Margin="25">
-            <TextBlock FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Text="Details"/>
-            <ListView BorderThickness="0">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBox x:Name="tb_firstName" />
-                            <TextBox x:Name="tb_lastName" />
-                            <TextBox x:Name="tb_email" />
-                            <TextBox x:Name="tb_phoneNumber" />
-                            <TextBox x:Name="tb_address" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Width="300">
+            <TextBlock Text="Details" HorizontalAlignment="Center" FontSize="22" FontWeight="Medium" Margin="0 10 0 0"/>
+
+            <TextBlock Text="First Name" FontWeight="DemiBold" />
+            <TextBlock x:Name="tb_firstName"/>
+ 
+            <TextBlock Text="Last Name" FontWeight="DemiBold" Margin="0 10 0 0" />
+            <TextBlock  x:Name="tb_lastName" />
+
+            <TextBlock Text="E-Mail" FontWeight="DemiBold" Margin="0 10 0 0" />
+            <TextBlock  x:Name="tb_email" />
+
+            <TextBlock Text="Phone number" FontWeight="DemiBold" Margin="0 10 0 0" />
+            <TextBlock  x:Name="tb_phoneNumber" />
+
+            <TextBlock Text="Address" FontWeight="DemiBold" Margin="0 10 0 0" />
+            <TextBlock  x:Name="tb_address" />
+
+            <TextBlock Text="ZIP" FontWeight="DemiBold" Margin="0 10 0 0" />
+            <TextBlock  x:Name="tb_zip" />
+
+            <TextBlock Text="City" FontWeight="DemiBold" Margin="0 10 0 0" />
+            <TextBlock  x:Name="tb_city" />
+
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Delete"
+                            Click="Button_Click"
+                            Margin="0 0 5 0"
+                            Width="50">
+                    </Button>
+                    <Button x:Name="Edit"
+                            Content="Edit"
+                            Width="50"
+                            Click="Edit_Click">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
