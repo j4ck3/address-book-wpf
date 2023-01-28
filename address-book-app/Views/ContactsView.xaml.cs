@@ -4,6 +4,7 @@ using address_book_app.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Data;
+using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
 namespace address_book_app.Views
@@ -25,27 +26,65 @@ namespace address_book_app.Views
         {
             Button? button = sender as Button;
             PersonModel? person = button.DataContext as PersonModel;
-            Guid Id = person.Id;
-            if (Id != Guid.Empty)
+            if (person != null)
             {
-                if (MessageBox.Show($"Are you sure you want to delete the contact {person.FirstName.Trim()}?",
-                "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                Guid Id = person.Id;
+                if (Id != Guid.Empty)
                 {
-                    file.RemovePerson(Id);
+                    if (MessageBox.Show($"Are you sure you want to delete the contact {person.FirstName}?",
+                    "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        file.RemovePerson(Id);
+                    }
                 }
-
             }
+        }
+
+        private void detailDelete_Click(object sender, RoutedEventArgs e)
+        {
+            PersonModel? person = PersonsGrid.SelectedItem as PersonModel;
+            if (person != null)
+            {
+                Guid Id = person.Id;
+                if (Id != Guid.Empty)
+                {
+                    if (MessageBox.Show($"Are you sure you want to delete the contact {person.FirstName}?",
+                    "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        file.RemovePerson(Id);
+                    }
+                }
+            }
+
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;
-            PersonModel? person = button.DataContext as PersonModel;
 
-            UpdateView UpdateView = new();
-            DataContext = new UpdateViewModel(person);
-            Content = UpdateView;
+            PersonModel? person = button.DataContext as PersonModel;
+            if (person != null) 
+            {
+                DataContext = new UpdateViewModel(person);
+                UpdateView UpdateView = new();
+                Content = UpdateView;
+            }
         }
+
+
+        private void detailEdit_Click(object sender, RoutedEventArgs e)
+        {
+            PersonModel? person = PersonsGrid.SelectedItem as PersonModel;
+
+            if (person != null)
+            {
+                DataContext = new UpdateViewModel(person);
+
+                UpdateView UpdateView = new();
+                Content = UpdateView;
+            }
+        }
+
 
         private void PersonsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -62,6 +101,7 @@ namespace address_book_app.Views
                 tb_city.Text = person.City;
             }
         }
-        
+
+
     }
 }
