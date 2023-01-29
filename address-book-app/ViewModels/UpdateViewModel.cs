@@ -4,9 +4,6 @@ using address_book_app.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
-using System.Collections.ObjectModel;
-using System.Net;
-using System.Windows.Controls;
 
 namespace address_book_app.ViewModels
 {
@@ -73,14 +70,16 @@ namespace address_book_app.ViewModels
                 Zip = zip,
                 City = city
             });
-            //gå tillbaka till kontakter.
+            //DataContext = new MainViewModel();
+            //UpdateView UpdateView = new();
+            //Content = UpdateView;
         }
 
 
-        //[RelayCommand]
-        //private void Cancel()
-        //{ 
-        //    mainviewmodel.CurrentViewModel = new ContactsViewModel();
-        //}
+        [RelayCommand]
+        private void Cancel()
+        {
+            
+        }
     }
 }

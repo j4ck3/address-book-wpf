@@ -33,9 +33,10 @@
 
             <TextBlock Text="City" FontWeight="DemiBold" />
             <TextBox Text="{Binding City}" Padding="5"/>
-            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                <Button Command="{Binding CancelCommand}" Margin="0 0 62 0" Padding="4" Content="Cancel"/>
-                <Button Command="{Binding UpdateContactCommand}" Margin="0 5 0 0" Padding="4" Content="Update Contact"/>
+
+            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                <Button Command="{Binding UpdateContactCommand}" Margin="0 0 0 5" Padding="4" Content="Save"/>
+                <Button Command="{Binding CancelCommand}" Padding="4" Content="Cancel"/>
             </StackPanel>
 
         </StackPanel>

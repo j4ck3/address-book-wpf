@@ -79,7 +79,6 @@ namespace address_book_app.Views
             if (person != null)
             {
                 DataContext = new UpdateViewModel(person);
-
                 UpdateView UpdateView = new();
                 Content = UpdateView;
             }
