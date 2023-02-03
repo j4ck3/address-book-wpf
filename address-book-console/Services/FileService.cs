@@ -6,10 +6,10 @@ namespace address_book_console.Services
 {
     public class FileService
     {
-        private readonly string filePath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\Content.json";
+        public string filePath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\Content.json";
         // $@"{Directory.GetCurrentDirectory()}\contacts.json";
 
-        private ObservableCollection<PersonModel> persons = new();
+        public ObservableCollection<PersonModel> persons = new();
         private readonly string EscMsg = "Tryck valfri tangent för att återgå till menyn.";
 
         public FileService()
@@ -17,13 +17,13 @@ namespace address_book_console.Services
             ReadFromFile();
         }
 
-        private void SaveToFile(ObservableCollection<PersonModel> persons)
+        public void SaveToFile(ObservableCollection<PersonModel> persons)
         {
             using var sw = new StreamWriter(filePath);
             sw.WriteLine(JsonConvert.SerializeObject(persons));
         }
 
-        private void ReadFromFile()
+        public void ReadFromFile()
         {
             try
             {

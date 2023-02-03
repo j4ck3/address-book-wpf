@@ -10,23 +10,17 @@ namespace address_book_app.ViewModels
     public partial class ContactsViewModel : ObservableObject
     {
         private readonly FileService file;
-
-        [ObservableProperty]
-        private ObservableObject currentViewModel;
         public ContactsViewModel()
         {
             file = new FileService();
             persons = file.Persons();
         }
 
-
         [ObservableProperty]
         private string pageTitle = "All Contacts";
 
         [ObservableProperty]
         private ObservableCollection<PersonModel> persons;
-
-
 
     }
 }

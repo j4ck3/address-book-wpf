@@ -1,11 +1,13 @@
 ﻿using address_book_app.Interfaces;
 using address_book_app.Models;
+using address_book_app.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Windows.Navigation;
 
 namespace address_book_app.Services
@@ -61,13 +63,9 @@ namespace address_book_app.Services
             SaveToFile(persons);
         }
 
-        public ObservableCollection<PersonModel> Persons()
+        public  ObservableCollection<PersonModel> Persons()
         {
-            var items = new ObservableCollection<PersonModel>();
-            foreach (var person in persons)
-                items.Add(person);
-
-            return items;
+            return persons;
         }
 
 

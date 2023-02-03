@@ -1,9 +1,13 @@
-﻿using address_book_app.Interfaces;
-using address_book_app.Models;
+﻿using address_book_app.Models;
 using address_book_app.Services;
+using address_book_app.Views;
+using address_book_app.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.ObjectModel;
+using System.Reflection.Metadata;
+using System.Windows.Controls;
 
 namespace address_book_app.ViewModels
 {
@@ -12,9 +16,7 @@ namespace address_book_app.ViewModels
         private readonly FileService file;
 
         [ObservableProperty]
-        private ObservableObject currentViewModel;
-
-       private readonly IPerson person; 
+        private ObservableCollection<PersonModel> persons;
 
         public UpdateViewModel(PersonModel person)
         {
@@ -57,7 +59,7 @@ namespace address_book_app.ViewModels
         }
 
         [RelayCommand]
-        private void UpdateContact()
+        public void UpdateContact()
         {
             file.Update(new PersonModel
             {
@@ -70,16 +72,12 @@ namespace address_book_app.ViewModels
                 Zip = zip,
                 City = city
             });
-            //DataContext = new MainViewModel();
-            //UpdateView UpdateView = new();
-            //Content = UpdateView;
         }
 
-
-        [RelayCommand]
-        private void Cancel()
-        {
-            
-        }
+      
     }
 }
+
+
+// INotifyPropertyChanged
+// show same contact on cancel in edit view.

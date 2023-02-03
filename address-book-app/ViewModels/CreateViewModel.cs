@@ -11,14 +11,14 @@ namespace address_book_app.ViewModels
 {
     internal partial class CreateViewModel : ObservableObject
     {
-        private readonly FileService fileService;
+        private readonly FileService file;
 
         [ObservableProperty]
         private string pageTitle = "Create A Contact";
 
         public CreateViewModel()
         {
-            fileService = new FileService();
+            file = new FileService();
         }
 
         [ObservableProperty]
@@ -39,7 +39,7 @@ namespace address_book_app.ViewModels
         [RelayCommand]
         private void AddContact()
         {
-            fileService.AddToList(new PersonModel
+            file.AddToList(new PersonModel
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -51,10 +51,6 @@ namespace address_book_app.ViewModels
             });
             ClearForm();
         }
-
-
-
-
 
         //Helper
         public void ClearForm()

@@ -1,10 +1,7 @@
 ﻿using address_book_app.Models;
 using address_book_app.Services;
 using address_book_app.ViewModels;
-using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Data;
-using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
 namespace address_book_app.Views
@@ -25,8 +22,7 @@ namespace address_book_app.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;
-            PersonModel? person = button.DataContext as PersonModel;
-            if (person != null)
+            if (button.DataContext is PersonModel person)
             {
                 Guid Id = person.Id;
                 if (Id != Guid.Empty)
@@ -40,10 +36,9 @@ namespace address_book_app.Views
             }
         }
 
-        private void detailDelete_Click(object sender, RoutedEventArgs e)
+        private void DetailDelete_Click(object sender, RoutedEventArgs e)
         {
-            PersonModel? person = PersonsGrid.SelectedItem as PersonModel;
-            if (person != null)
+            if (PersonsGrid.SelectedItem is PersonModel person)
             {
                 Guid Id = person.Id;
                 if (Id != Guid.Empty)
@@ -62,8 +57,7 @@ namespace address_book_app.Views
         {
             Button? button = sender as Button;
 
-            PersonModel? person = button.DataContext as PersonModel;
-            if (person != null) 
+            if (button.DataContext is PersonModel person)
             {
                 DataContext = new UpdateViewModel(person);
                 UpdateView UpdateView = new();
@@ -72,11 +66,9 @@ namespace address_book_app.Views
         }
 
 
-        private void detailEdit_Click(object sender, RoutedEventArgs e)
+        private void DetailEdit_Click(object sender, RoutedEventArgs e)
         {
-            PersonModel? person = PersonsGrid.SelectedItem as PersonModel;
-
-            if (person != null)
+            if (PersonsGrid.SelectedItem is PersonModel person)
             {
                 DataContext = new UpdateViewModel(person);
                 UpdateView UpdateView = new();
@@ -87,9 +79,7 @@ namespace address_book_app.Views
 
         private void PersonsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var person = PersonsGrid.SelectedItem as PersonModel;
-
-            if (person != null)
+            if (PersonsGrid.SelectedItem is PersonModel person)
             {
                 tb_firstName.Text = person.FirstName;
                 tb_lastName.Text = person.LastName;

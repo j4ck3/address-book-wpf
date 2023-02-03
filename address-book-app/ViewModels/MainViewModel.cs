@@ -1,13 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 namespace address_book_app.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private ObservableObject currentViewModel;
+        [ObservableProperty] 
+        public static ObservableObject currentViewModel;
 
 
         [RelayCommand]
@@ -25,11 +26,11 @@ namespace address_book_app.ViewModels
         [RelayCommand]
         private static void GithubLink()
         {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "https://github.com/j4ck3/address-book-wpf",
-                    UseShellExecute = true
-                });
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/j4ck3/address-book-wpf",
+                UseShellExecute = true
+            });
         }
     }
 }
