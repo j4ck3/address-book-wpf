@@ -1,17 +1,13 @@
 ﻿using address_book_app.Models;
 using address_book_app.Services;
-using address_book_app.Views;
-using address_book_app.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
-using System.Windows.Controls;
 
 namespace address_book_app.ViewModels
 {
-    internal partial class UpdateViewModel : ObservableObject
+    public partial class UpdateViewModel : ObservableObject
     {
         private readonly FileService file;
 
@@ -26,7 +22,6 @@ namespace address_book_app.ViewModels
 
         [ObservableProperty]
         private string updateViewTitle = "Update Contact";
-
 
         private Guid id;
 
@@ -73,11 +68,5 @@ namespace address_book_app.ViewModels
                 City = city
             });
         }
-
-      
     }
 }
-
-
-// INotifyPropertyChanged
-// show same contact on cancel in edit view.

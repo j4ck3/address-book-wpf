@@ -1,10 +1,6 @@
-﻿using address_book_app.Models;
-using address_book_app.ViewModels;
-using System;
+﻿using address_book_app.ViewModels;
 using System.Windows.Controls;
 using System.Windows;
-using address_book_app.Services;
-using System.Net;
 
 namespace address_book_app.Views
 {

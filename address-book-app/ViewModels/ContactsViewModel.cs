@@ -20,7 +20,6 @@ namespace address_book_app.ViewModels
         private string pageTitle = "All Contacts";
 
         [ObservableProperty]
-        private ObservableCollection<PersonModel> persons;
-
+        public ObservableCollection<PersonModel> persons;
     }
 }

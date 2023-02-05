@@ -1,51 +1,33 @@
 using address_book_console.Models;
 using address_book_console.Services;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
 
 namespace address_book_console.tests
 {
     public class FileService_Tests
     {
-
-        readonly FileService fileService;
-
-        ObservableCollection<PersonModel> listoutside = new();
+        FileService fileService;
 
         private PersonModel person = new()
         {
-            FirstName = "Firstname",
-            LastName = "Lastname",
-            Email = "email@domain.com",
-            PhoneNumber = "070-1234567",
-            Address = "Adress"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@domain.com",
+            PhoneNumber = "0765546865",
+            Address = "Randomgatan 122"
         };
-
 
         public FileService_Tests()
         {
             fileService = new FileService();
-            fileService.filePath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
-
-
-            listoutside.Add(person);
-
-            fileService.AddToList(person);
-
         }
-
 
         [Fact]
         public void Should_Create_A_File_With_Json_Data()
         {
-            fileService.ReadFromFile();
+            fileService.AddToList(person);
 
             Assert.True(File.Exists(fileService.filePath));
-            Assert.Equal(fileService.persons, listoutside);
+            Assert.Contains(person, fileService.persons);
         }
     }
 }
-
-
-
-

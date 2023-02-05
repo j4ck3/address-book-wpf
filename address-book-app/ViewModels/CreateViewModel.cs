@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace address_book_app.ViewModels
 {
-    internal partial class CreateViewModel : ObservableObject
+    public partial class CreateViewModel : ObservableObject
     {
         private readonly FileService file;
 

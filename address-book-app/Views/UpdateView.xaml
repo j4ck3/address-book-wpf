@@ -38,7 +38,6 @@
                 <Button Command="{Binding UpdateContactCommand}" Margin="0 0 0 5" Padding="4" Content="Save"/>
                 <Button x:Name="CancelBtn" Click="CancelBtn_Click" Padding="4" Content="Cancel"/>
             </StackPanel>
-
         </StackPanel>
     </Grid>
 </UserControl>

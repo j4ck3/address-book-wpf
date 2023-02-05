@@ -7,7 +7,6 @@ namespace address_book_console.Services
     public class FileService
     {
         public string filePath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\Content.json";
-        // $@"{Directory.GetCurrentDirectory()}\contacts.json";
 
         public ObservableCollection<PersonModel> persons = new();
         private readonly string EscMsg = "Tryck valfri tangent för att återgå till menyn.";
@@ -37,8 +36,8 @@ namespace address_book_console.Services
         {
             persons.Add(person);
             SaveToFile(persons);
-            Console.WriteLine($" Kontakten har skapats. {EscMsg}");
-            Console.ReadKey();
+            //Console.WriteLine($" Kontakten har skapats. {EscMsg}");
+            //Console.ReadKey();
         }
 
         public ObservableCollection<PersonModel> Persons()

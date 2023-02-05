@@ -1,14 +1,10 @@
-﻿using address_book_app.Interfaces;
-using address_book_app.Models;
-using address_book_app.ViewModels;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Windows.Navigation;
+using address_book_app.Models;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
+
 
 namespace address_book_app.Services
 {
@@ -63,7 +59,7 @@ namespace address_book_app.Services
             SaveToFile(persons);
         }
 
-        public  ObservableCollection<PersonModel> Persons()
+        public ObservableCollection<PersonModel> Persons()
         {
             return persons;
         }
@@ -81,11 +77,7 @@ namespace address_book_app.Services
                     persons.Remove(person);
                     SaveToFile(persons);
                 }
-                catch
-                {
-                    
-                }
-
+                catch{ }
             }
         }
     }
